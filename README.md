@@ -1,4 +1,4 @@
-[<img src="https://nifi.apache.org/assets/images/apache-nifi-logo.svg" width="300" height="126" alt="Apache NiFi"/>][nifi]
+<img src="https://nifi.apache.org/assets/images/apache-nifi-logo.svg" width="300" height="126" alt="Apache NiFi"/>
 
 [Apache NiFi](https://nifi.apache.org/) Um excelente sistema que pode auxiliar tarefas massivas com uma interação grafica surpreendente. 
 
