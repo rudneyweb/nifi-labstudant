@@ -1,0 +1,37 @@
+version: "3"
+services:
+  zookeeper:
+    hostname: zookeeper
+    container_name: zookeeper
+    image: 'bitnami/zookeeper:latest'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+  nifi:
+    container_name: nifi_container
+    image: apache/nifi:latest
+    ports:
+      - "8443:8443"
+      - "9998:9998"
+    environment:
+      - SINGLE_USER_CREDENTIALS_USERNAME=admin
+      - SINGLE_USER_CREDENTIALS_PASSWORD=SEnhaNIFI@2023!
+    volumes:
+      - /volumes-docker/containervolumenifi:/opt/nifi/nifi-current/drivers
+      - /volumes-docker/nifi_logs:/opt/nifi/nifi-current/logs/nifi-deprecation.log
+      - /volumes-docker/nifi_state:/opt/nifi/nifi-current/state
+      - /volumes-docker/nifi_database_repository:/opt/nifi/nifi-current/database_repository
+      - /volumes-docker/nifi_flowfile_repository:/opt/nifi/nifi-current/flowfile_repository
+      - /volumes-docker/nifi_content_repository:/opt/nifi/nifi-current/content_repository
+      - /volumes-docker/nifi_provenance_repository:/opt/nifi/nifi-current/provenance_repository
+  db:
+    container_name: mysql_container
+    image: mysql
+    ports:
+      - "3306:3306"
+    command:
+      - --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+        MYSQL_ROOT_PASSWORD: testenifi
+    volumes:
+      - /volumes-docker/mysqlcontainervolume:/var/lib/mysql
